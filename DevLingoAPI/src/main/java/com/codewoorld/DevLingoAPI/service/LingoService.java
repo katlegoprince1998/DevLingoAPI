@@ -15,4 +15,8 @@ public interface LingoService {
     String delete(String id);
 
     Page<Lingo> search(String name, String community, String yearCreated, String createdBy, String usage, Pageable pageable);
+
+    String update(String id, LingoDto dto);
+
+    List<Lingo> get();
 }

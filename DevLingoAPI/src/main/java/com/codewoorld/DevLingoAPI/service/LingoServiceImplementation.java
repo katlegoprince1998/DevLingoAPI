@@ -1,6 +1,7 @@
 package com.codewoorld.DevLingoAPI.service;
 
 import com.codewoorld.DevLingoAPI.collection.Lingo;
+import com.codewoorld.DevLingoAPI.exception.LingoNotFoundException;
 import com.codewoorld.DevLingoAPI.repository.LingoRepository;
 import dto.LingoDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,13 +43,18 @@ public class LingoServiceImplementation implements LingoService {
 
     @Override
     public List<Lingo> getAllData(String name) {
-
+        if (repository.findByName(name).isEmpty()) {
+            throw new LingoNotFoundException("Lingo not found");
+        }
         return repository.findByName(name);
 
     }
 
     @Override
     public String delete(String id) {
+        if (repository.findById(id).isEmpty()) {
+            throw new LingoNotFoundException("Lingo not found");
+        }
         repository.deleteById(id);
         return "deleted";
     }
@@ -92,6 +99,41 @@ public class LingoServiceImplementation implements LingoService {
         }
 
         return PageableExecutionUtils.getPage(result, pageable, () -> total);
+    }
+
+    @Override
+    public String update(String id, LingoDto dto) {
+        if (repository.findById(id).isEmpty()) {
+            throw new LingoNotFoundException("Lingo not found");
+        }
+        Lingo lingoDb = repository.findById(id).get();
+
+        if(Objects.nonNull(dto.getName()) && !"".equalsIgnoreCase(dto.getName())) {
+            lingoDb.setName(dto.getName());
+        }
+        if(Objects.nonNull(dto.getCommunity()) && !"".equalsIgnoreCase(dto.getCommunity())) {
+            lingoDb.setCommunity(dto.getCommunity());
+        }
+        if(dto.getYear_created() != null) {
+            lingoDb.setYear_created(Integer.valueOf(dto.getYear_created()));
+        }
+        if(Objects.nonNull(dto.getCreated_by()) && !"".equalsIgnoreCase(dto.getCreated_by())) {
+            lingoDb.setCreated_by(dto.getCreated_by());
+        }
+        if(Objects.nonNull(dto.getUsage()) && !"".equalsIgnoreCase(String.valueOf(dto.getUsage()))) {
+            lingoDb.setUsage(dto.getUsage());
+        }
+
+        repository.save(lingoDb);
+        return "updated";
+    }
+
+    @Override
+    public List<Lingo> get() {
+        if (repository.findAll().isEmpty()) {
+            throw new LingoNotFoundException("Lingo not found");
+        }
+        return repository.findAll();
     }
 
 }

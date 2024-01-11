@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -17,6 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LingoController {
     private final LingoService service;
+    @GetMapping("/")
+    public String index(Principal principal) {
+        return "Hello " + principal.getName() + "!";
+    }
 
     @PostMapping("/create")
     public String create(@RequestBody LingoDto dto) {
@@ -44,5 +49,15 @@ public class LingoController {
     ) {
         Pageable pageable = PageRequest.of(page, size);
         return service.search(name, community, year_created, created_by, usage, pageable);
+    }
+
+    @PutMapping("/update/{id}")
+    public String update(@PathVariable("id") String id, @RequestBody LingoDto dto) {
+        return service.update(id, dto);
+    }
+
+    @GetMapping("/get")
+    public List<Lingo> get(){
+        return service.get();
     }
   }

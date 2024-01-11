@@ -1,4 +1,4 @@
-package com.codewoorld.DevLingoAPI.config;
+package com.codewoorld.DevLingoAPI.config.SwaggerConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
