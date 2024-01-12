@@ -1,6 +1,8 @@
 # DevLingoAPI
 DevLingoAPI stands as a robust REST API meticulously crafted using Spring Boot and MongoDB. Leveraging Docker, this application has been containerized for seamless deployment and scalability. It offers an array of programming language details, providing developers easy access to comprehensive language-related information.
 
+This is a CRUD System with basic security. I used MongoDB to store and retrieve my data. This project is containerised using Docker.
+
 
 # Resources
 
@@ -23,4 +25,8 @@ DevLingoAPI stands as a robust REST API meticulously crafted using Spring Boot a
   
 6. api/v1/delete/{id}
    - The User can delete data by simply providing the id of the data that must be deleted.
+
+# Security
+
+In this project I implemented basic security, I created a default user using In memory user Details manager. For the SecurityFilterChain I only made few configuartions like disabling CSRF, ensuring that all HTTP requests must be authorised. 
    
