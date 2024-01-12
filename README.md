@@ -29,4 +29,8 @@ This is a CRUD System with basic security. I used MongoDB to store and retrieve 
 # Security
 
 In this project I implemented basic security, I created a default user using In memory user Details manager. For the SecurityFilterChain I only made few configuartions like disabling CSRF, ensuring that all HTTP requests must be authorised. 
+
+# System Architecture
+
+Link : https://drive.google.com/file/d/1FZWj76J_DvW4qXGgM7WgkExjhrYcgCsv/view?usp=sharing
    
