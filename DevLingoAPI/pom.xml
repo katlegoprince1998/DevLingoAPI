@@ -77,6 +77,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>DevLingoAPI-0.0.1-SNAPSHOT</finalName>
 	</build>
-
 </project>
