@@ -6,7 +6,7 @@ DevLingoAPI stands as a robust REST API meticulously crafted using Spring Boot a
 This is a CRUD System with basic security. I used MongoDB to store and retrieve my data. This project is containerised using Docker.
 
 
-# Resources
+## Resources
 
 1. api/v1/get
    - This resource will display all data from mongo db.
